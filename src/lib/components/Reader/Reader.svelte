@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { beforeNavigate } from '$app/navigation';
+  import { page as pageStore } from '$app/stores';
   import { catalog } from '$lib/catalog';
   import {
     Panzoom,
@@ -9,21 +11,19 @@
   } from '$lib/panzoom';
   import { progress, settings, updateProgress, type VolumeSettings } from '$lib/settings';
   import { clamp, debounce, fireExstaticEvent } from '$lib/util';
+  import { getCharCount } from '$lib/util/count-chars';
   import { Input, Popover, Range, Spinner } from 'flowbite-svelte';
-  import MangaPage from './MangaPage.svelte';
   import {
     ChervonDoubleLeftSolid,
     ChervonDoubleRightSolid,
     ChevronLeftSolid,
     ChevronRightSolid
   } from 'flowbite-svelte-icons';
-  import Cropper from './Cropper.svelte';
-  import { page as pageStore } from '$app/stores';
-  import SettingsButton from './SettingsButton.svelte';
-  import { getCharCount } from '$lib/util/count-chars';
-  import QuickActions from './QuickActions.svelte';
-  import { beforeNavigate } from '$app/navigation';
   import { onMount } from 'svelte';
+  import Cropper from './Cropper.svelte';
+  import MangaPage from './MangaPage.svelte';
+  import QuickActions from './QuickActions.svelte';
+  import SettingsButton from './SettingsButton.svelte';
 
   // TODO: Refactor this whole mess
   export let volumeSettings: VolumeSettings;
@@ -250,7 +250,6 @@
 </script>
 
 <svelte:window
-  on:resize={zoomDefault}
   on:keyup={handleShortcuts}
   on:touchstart={handleTouchStart}
   on:touchend={handlePointerUp}
